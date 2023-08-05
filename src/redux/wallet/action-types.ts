@@ -1,0 +1,11 @@
+export const walletActionTypes = {
+  ADD_EXPENSE: 'wallet/ADD_EXPENSE',
+  DELETE_EXPENSE: 'wallet/DELETE_EXPENSE',
+  EDIT_EXPENSE: 'wallet/EDIT_EXPENSE',
+  ADD_CURRENCY: 'wallet/ADD_CURRENCY',
+  DELETE_CURRENCY: 'wallet/DELETE_CURRENCY',
+  EDIT_CURRENCY: 'wallet/EDIT_CURRENCY',
+  ADD_TOTAL: 'wallet/ADD_TOTAL',
+  DELETE_TOTAL: 'wallet/DELETE_TOTAL',
+  EDIT_TOTAL: 'wallet/EDIT_TOTAL',
+};
