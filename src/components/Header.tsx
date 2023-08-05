@@ -1,5 +1,22 @@
+import { useSelector } from 'react-redux';
+
 function Header() {
-  return <div>Header</div>;
+  const { email, totalMoney = 0 } = useSelector((state: any) => state.userReducer);
+  return (
+    <div>
+      <div>
+        Email:
+        {' '}
+        <span data-testid="email-field">{email}</span>
+      </div>
+      <div>
+        Despesa Total: R$
+        {' '}
+        <span data-testid="total-field">{ totalMoney }</span>
+      </div>
+      <span data-testid="header-currency-field">BRL</span>
+    </div>
+  );
 }
-// a
+
 export default Header;
