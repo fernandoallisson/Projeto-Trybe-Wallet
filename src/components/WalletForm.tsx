@@ -1,7 +1,19 @@
-import { getCurrencies } from '../services/currency';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrenciesRequest } from '../redux/wallet/action';
+import { CashType } from '../types';
 
 function WalletForm() {
-  // const currencies = getCurrencies();
+  const dispatch = useDispatch();
+
+  const { currencies } = useSelector((state: any) => state.wallet);
+
+  useEffect(() => {
+    dispatch(fetchCurrenciesRequest());
+  }, [dispatch]);
+
+  // console.log(currencies);
+
   return (
     <div>
       <label htmlFor="cashValue">
@@ -20,9 +32,14 @@ function WalletForm() {
           id="cashType"
           data-testid="currency-input"
         >
-          {/* {currencies.map((currency) => (
-            <option value={currency}>{currency}</option>
-          ))} */}
+          { currencies && currencies.map((currency: CashType) => (
+            <option
+              key={ currency.name }
+              value={ currency.code }
+            >
+              {currency.code}
+            </option>
+          ))}
         </select>
       </label>
       <label htmlFor="method">

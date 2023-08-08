@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 function Header() {
-  const { email, totalMoney = 0 } = useSelector((state: any) => state.userReducer);
+  const { email, totalMoney = 0 } = useSelector((state: any) => state.user);
   return (
     <div>
       <div>

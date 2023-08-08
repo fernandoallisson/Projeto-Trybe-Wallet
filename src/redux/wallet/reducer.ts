@@ -3,54 +3,29 @@ import { walletActionTypes } from './action-types';
 
 const initialState = {
   currencies: [],
-  expenses: [],
-  total: 0,
-  coins: [],
-  cash: [],
 };
 
-type Action = {
-  type: string;
-  payload: AnyAction;
-};
-
-const walletReducer = (state = initialState, action: Action) => {
+export function walletReducer(state = initialState, action: AnyAction) {
   switch (action.type) {
-    case walletActionTypes.ADD_CURRENCY:
+    // case para adicionar moedas
+    case walletActionTypes.FETCH_CURRENCIES_REQUEST:
       return {
         ...state,
-        currencies: [...state.currencies, action.payload.currency],
+        currencies: [...state.currencies, ...action.payload],
       };
-    case walletActionTypes.ADD_EXPENSE:
+      // case para caso de sucesso
+    case walletActionTypes.FETCH_CURRENCIES_SUCCESS:
       return {
         ...state,
-        expenses: [...state.expenses, action.payload.expense],
+        currencies: [...action.payload.currencies],
       };
-    case walletActionTypes.REMOVE_EXPENSE:
+      // case para caso de falha
+    case walletActionTypes.FETCH_CURRENCIES_FAILURE:
       return {
         ...state,
-        expenses: state.expenses.filter(
-          (expense) => expense.id !== action.payload.id,
-        ),
-      };
-    case walletActionTypes.UPDATE_TOTAL:
-      return {
-        ...state,
-        total: action.payload.total,
-      };
-    case walletActionTypes.GET_COINS:
-      return {
-        ...state,
-        coins: action.payload.coins,
-      };
-    case walletActionTypes.GET_CASH:
-      return {
-        ...state,
-        cash: action.payload.cash,
+        error: action.payload.error,
       };
     default:
       return state;
   }
 }
-
-export default walletReducer;

@@ -12,7 +12,7 @@ type Action = {
   payload: AnyAction;
 };
 
-const userReducer = (state = initialState, action: Action) => {
+export const userReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case userActionTypes.LOGIN:
       return {
@@ -32,5 +32,3 @@ const userReducer = (state = initialState, action: Action) => {
       return state;
   }
 };
-
-export default userReducer;
