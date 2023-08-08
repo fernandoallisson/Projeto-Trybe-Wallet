@@ -3,6 +3,9 @@ import { walletActionTypes } from './action-types';
 
 const initialState = {
   currencies: [],
+  expenses: [],
+  error: '',
+  id: 0,
 };
 
 export function walletReducer(state = initialState, action: AnyAction) {
@@ -13,17 +16,17 @@ export function walletReducer(state = initialState, action: AnyAction) {
         ...state,
         currencies: [...state.currencies, ...action.payload],
       };
-      // case para caso de sucesso
-    case walletActionTypes.FETCH_CURRENCIES_SUCCESS:
+      // case para adicionar despesas
+    case walletActionTypes.ADD_EXPENSE:
       return {
         ...state,
-        currencies: [...action.payload.currencies],
+        expenses: [...state.expenses, action.payload.expense],
       };
-      // case para caso de falha
-    case walletActionTypes.FETCH_CURRENCIES_FAILURE:
+      // case para adicionar o rates
+    case walletActionTypes.FETCH_EXCHANGE_RATES_SUCCESS:
       return {
         ...state,
-        error: action.payload.error,
+        exchangeRates: action.payload.exchangeRates,
       };
     default:
       return state;

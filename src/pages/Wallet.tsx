@@ -1,6 +1,7 @@
 // import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
+import { WalletCard } from '../components/walletCard';
 // import CurrencyInfo from '../teste';
 
 function Wallet() {
@@ -10,7 +11,7 @@ function Wallet() {
     <div>
       <Header />
       <WalletForm />
-      {/* <CurrencyInfo /> */}
+      <WalletCard />
     </div>
   );
 }
