@@ -15,16 +15,16 @@ const INITIAL_STATE = {
   code: '',
 };
 
-type Expenses = {
-  id: number;
-  value: number;
-  currency: string;
-  method: string;
-  tag: string;
-  description: string;
-  exchangeRate: object;
-  code: string;
-};
+// type Expenses = {
+//   id: number;
+//   value: number;
+//   currency: string;
+//   method: string;
+//   tag: string;
+//   description: string;
+//   exchangeRate: object;
+//   code: string;
+// };
 
 function WalletForm() {
   const dispatch = useDispatch();
