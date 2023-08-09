@@ -1,4 +1,4 @@
-import { getCurrency } from '../../services/currency';
+import { getCurrency, getCurrencyExchange } from '../../services/currency';
 import { walletActionTypes } from './action-types';
 
 // A tradução de Currencie é Moeda
@@ -19,40 +19,26 @@ export const fetchCurrenciesRequest = (): any => {
         type: walletActionTypes.FETCH_CURRENCIES_REQUEST,
         payload: currenciesArray,
       });
-      dispatch(fetchCurrenciesSuccess(currenciesArray));
     } catch (error) {
-      dispatch(fetchCurrenciesFailure(error));
+      console.error(error);
     }
   };
 };
 
-export const fetchCurrenciesSuccess = (currencies: any) => ({
-  type: walletActionTypes.FETCH_CURRENCIES_SUCCESS,
-  payload: {
-    currencies,
-  },
-});
-
-export const fetchCurrenciesFailure = (error: any) => ({
-  type: walletActionTypes.FETCH_CURRENCIES_FAILURE,
-  payload: {
-    error,
-  },
-});
-
-export const fetchExchangeRatesSuccess = (exchangeRates: any) => ({
-  type: walletActionTypes.FETCH_EXCHANGE_RATES_SUCCESS,
-  payload: {
-    exchangeRates,
-  },
-});
-
-export const fetchExchangeRatesFailure = (error: any) => ({
-  type: walletActionTypes.FETCH_EXCHANGE_RATES_FAILURE,
-  payload: {
-    error,
-  },
-});
+export const fetchExchangeCurrencies = (): any => {
+  return async (dispatch: any) => {
+    try {
+      const data = await getCurrencyExchange();
+      const currenciesArray = Object.values(data);
+      dispatch({
+        type: walletActionTypes.FETCH_EXCHANGE_CURRENCIES,
+        payload: currenciesArray,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
 
 export const addExpense = (expense: any) => ({
   type: walletActionTypes.ADD_EXPENSE,

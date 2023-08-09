@@ -5,10 +5,10 @@ function Header() {
   const { expenses } = useSelector((state: any) => state.wallet);
 
   const totalMoney = expenses.reduce((acc: number, curr: any) => {
-    const { value, exchangeRate } = curr;
-    const total = acc + (value * exchangeRate);
-    console.log(exchangeRate);
-    return total;
+    const { value, exchangeRates } = curr;
+    const { ask } = exchangeRates[curr.currency];
+    const total = Number(value) * Number(ask);
+    return acc + total;
   }, 0).toFixed(2);
 
   return (

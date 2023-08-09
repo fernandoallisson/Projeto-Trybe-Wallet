@@ -1,16 +1,16 @@
 import { useSelector } from 'react-redux';
 
 export function WalletCard() {
-  const { expenses } = useSelector((state: any) => state.wallet);
+  const { expense } = useSelector((state: any) => state.wallet);
 
   return (
     <div>
       <h2>Wallet Card</h2>
-      {!expenses ? (
+      {!expense ? (
         <p>Não tem nada aqui de Wallet Card</p>
       ) : (
-        <>
-          {expenses.map((expense: any) => (
+        <div>
+          {expense.map((expense: any) => (
             <ul key={ expense.id }>
               <li>{ expense.description }</li>
               <li>
@@ -24,7 +24,7 @@ export function WalletCard() {
               <li>{ expense.tag }</li>
             </ul>
           ))}
-        </>
+        </div>
       )}
     </div>
   );

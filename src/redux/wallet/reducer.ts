@@ -10,24 +10,28 @@ const initialState = {
 
 export function walletReducer(state = initialState, action: AnyAction) {
   switch (action.type) {
-    // case para adicionar moedas
-    case walletActionTypes.FETCH_CURRENCIES_REQUEST:
+    // case para adicionar os símbolos das moedas
+    case walletActionTypes.FETCH_CURRENCIES_REQUEST
+    || walletActionTypes.FETCH_ONLY_CURRENCIES_REQUEST:
       return {
         ...state,
         currencies: [...state.currencies, ...action.payload],
       };
+
       // case para adicionar despesas
     case walletActionTypes.ADD_EXPENSE:
       return {
         ...state,
         expenses: [...state.expenses, action.payload.expense],
       };
-      // case para adicionar o rates
-    case walletActionTypes.FETCH_EXCHANGE_RATES_SUCCESS:
+
+      // case para adicionar as moedas
+    case walletActionTypes.FETCH_EXCHANGE_CURRENCIES:
       return {
         ...state,
-        exchangeRates: action.payload.exchangeRates,
+        data: action.payload,
       };
+
     default:
       return state;
   }
