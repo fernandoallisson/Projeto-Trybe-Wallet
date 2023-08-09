@@ -4,17 +4,6 @@ import { addExpense,
   fetchCurrenciesRequest,
   fetchExchangeCurrencies } from '../redux/wallet/action';
 
-const INITIAL_STATE = {
-  id: 0,
-  value: 0,
-  currency: 'USD',
-  method: 'Dinheiro',
-  tag: 'Alimentação',
-  description: '',
-  exchangeRates: {},
-  code: '',
-};
-
 // type Expenses = {
 //   id: number;
 //   value: number;
@@ -27,14 +16,23 @@ const INITIAL_STATE = {
 // };
 
 function WalletForm() {
-  const dispatch = useDispatch();
-  const [dataLocal, setDataLocal] = useState(INITIAL_STATE);
-  const { currencies } = useSelector((state: any) => state.wallet);
   const { data } = useSelector((state: any) => state.wallet);
-
+  const { currencies } = useSelector((state: any) => state.wallet);
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCurrenciesRequest());
   }, [dispatch]);
+  const INITIAL_STATE = {
+    id: 0,
+    value: 0,
+    currency: currencies[0],
+    method: 'Dinheiro',
+    tag: 'Alimentação',
+    description: '',
+    exchangeRates: {},
+    ask: 0,
+  };
+  const [dataLocal, setDataLocal] = useState(INITIAL_STATE);
 
   useEffect(() => {
     dispatch(fetchExchangeCurrencies());
@@ -50,13 +48,14 @@ function WalletForm() {
       method,
       tag,
       description,
+      ask: Number(data.find((e: any) => e.code === currency).ask),
       exchangeRates: data,
     }));
     setDataLocal(INITIAL_STATE); // Limpa o form
   };
 
   const handleTeste = () => {
-    console.log(data);
+    console.log(currencies);
   };
   return (
     <div>

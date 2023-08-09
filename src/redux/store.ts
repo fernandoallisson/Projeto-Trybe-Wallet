@@ -9,4 +9,8 @@ const store = (
   createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)))
 );
 
+if (window.Cypress) {
+  window.store = store;
+}
+
 export default store;

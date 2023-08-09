@@ -5,9 +5,8 @@ function Header() {
   const { expenses } = useSelector((state: any) => state.wallet);
 
   const totalMoney = expenses.reduce((acc: any, curr: any) => {
-    const { value, currency, exchangeRates } = curr;
-    const exchang = exchangeRates.find((e: any) => e.code === currency);
-    const total = value * exchang.ask;
+    const { value, ask } = curr;
+    const total = value * ask;
     return acc + total;
   }, 0).toFixed(2);
 
