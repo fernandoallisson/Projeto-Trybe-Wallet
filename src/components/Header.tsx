@@ -4,10 +4,10 @@ function Header() {
   const { email } = useSelector((state: any) => state.user);
   const { expenses } = useSelector((state: any) => state.wallet);
 
-  const totalMoney = expenses.reduce((acc: number, curr: any) => {
-    const { value, exchangeRates } = curr;
-    const { ask } = exchangeRates[curr.currency];
-    const total = Number(value) * Number(ask);
+  const totalMoney = expenses.reduce((acc: any, curr: any) => {
+    const { value, currency, exchangeRates } = curr;
+    const exchang = exchangeRates.find((e: any) => e.code === currency);
+    const total = value * exchang.ask;
     return acc + total;
   }, 0).toFixed(2);
 

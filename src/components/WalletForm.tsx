@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   method: 'Dinheiro',
   tag: 'Alimentação',
   description: '',
-  exchangeRate: {},
+  exchangeRates: {},
   code: '',
 };
 
@@ -50,7 +50,7 @@ function WalletForm() {
       method,
       tag,
       description,
-      exchangeRate: data.map((curr: Expenses) => curr),
+      exchangeRates: data,
     }));
     setDataLocal(INITIAL_STATE); // Limpa o form
   };
