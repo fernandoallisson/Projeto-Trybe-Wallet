@@ -22,7 +22,7 @@ export function walletReducer(state = initialState, action: AnyAction) {
     case walletActionTypes.ADD_EXPENSE:
       return {
         ...state,
-        expenses: [...state.expenses, action.payload.expense],
+        expenses: [...state.expenses, action.payload],
       };
 
       // case para adicionar as moedas
@@ -32,6 +32,12 @@ export function walletReducer(state = initialState, action: AnyAction) {
         data: action.payload,
       };
 
+      // case para remover despesas
+    case walletActionTypes.REMOVE_EXPENSE:
+      return {
+        ...state,
+        expenses: state.expenses.filter((expense: any) => expense.id !== action.payload),
+      };
     default:
       return state;
   }

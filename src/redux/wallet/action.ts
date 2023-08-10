@@ -29,10 +29,9 @@ export const fetchExchangeCurrencies = (): any => {
   return async (dispatch: any) => {
     try {
       const data = await getCurrencyExchange();
-      const currenciesArray = Object.values(data);
       dispatch({
         type: walletActionTypes.FETCH_EXCHANGE_CURRENCIES,
-        payload: currenciesArray,
+        payload: data,
       });
     } catch (error) {
       console.error(error);
@@ -40,16 +39,27 @@ export const fetchExchangeCurrencies = (): any => {
   };
 };
 
-export const addExpense = (expense: any) => ({
-  type: walletActionTypes.ADD_EXPENSE,
-  payload: {
-    expense,
-  },
-});
+// Toda vez que eu chamar essa função, ela vai chamar a API e vai retornar um objeto com as moedas com thunk
 
-export const removeExpense = (expense: any) => ({
+export const addExpense = (expense: any): any => {
+  return async (dispatch: any) => {
+    try {
+      const exchangeRates = await getCurrencyExchange();
+
+      dispatch({
+        type: walletActionTypes.ADD_EXPENSE,
+        payload: {
+          ...expense,
+          exchangeRates,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const removeExpense = (id: number): any => ({
   type: walletActionTypes.REMOVE_EXPENSE,
-  payload: {
-    expense,
-  },
+  payload: id,
 });
